@@ -20,9 +20,12 @@ jobs:
         if: steps.changed-files.outputs.modified_files  != '[]'
         run: |
           echo "One or more files in the migrations folder has changed."
-          echo "List all the files that have changed: ${{ steps.changed-files-specific.outputs.modified_files }}"
-          echo ${{ steps.changed-files.outputs }}
-          for file in ${{ steps.changed-files-specific.outputs.modified_files }}; do
+          echo "List all the files that have changed: ${{ steps.changed-files.outputs.modified_files }}"
+          for file in ${{ steps.changed-files.outputs.modified_files }}; do
           echo "$file was changed"
           done
           echo "Aborting the pipeline as migration changed files were detected !"
+          sudo apt update
+          sudo apt install -y jq
+          echo ${{ steps.changed-files.outputs }} | jq .[]
+          
