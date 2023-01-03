@@ -22,8 +22,11 @@ jobs:
         run: |
           echo "One or more files in the migrations folder has changed."
           echo "List all the files that have changed: ${{ steps.changed-files.outputs.modified_files }}"
-          for file in ${{ steps.changed-files.outputs.modified_files }}; do
-          echo "$file was changed"
-          done
           echo "Aborting the pipeline as migration changed files were detected !"
+          exit 4
+          
+
+      - name: Step3
+        run: |
+          echo "Step 3"
           
