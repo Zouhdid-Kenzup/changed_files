@@ -27,5 +27,5 @@ jobs:
           echo "Aborting the pipeline as migration changed files were detected !"
           sudo apt update
           sudo apt install -y jq
-          echo ${{ steps.changed-files.outputs }} | jq .[]
+          echo ${{ steps.changed-files.outputs }} | | jq '.'
           
