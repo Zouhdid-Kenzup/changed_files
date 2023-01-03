@@ -13,6 +13,7 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v35
         with:
+          json: true
           files: |
             **/migrations/*.py
 
@@ -27,5 +28,5 @@ jobs:
           echo "Aborting the pipeline as migration changed files were detected !"
           sudo apt update
           sudo apt install -y jq
-          echo ${{ steps.changed-files.outputs }} | | jq '.'
+          echo ${{ steps.changed-files.outputs }} | jq '.'
           
